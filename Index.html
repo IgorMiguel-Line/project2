@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUB TEENS EM AÇÃO</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            height: 850px;
+            background: #fff;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            overflow-y: auto;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === TELA 1: SPLASH SCREEN === */
+        .splash-screen {
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .splash-logo {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .splash-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .splash-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #667eea;
+            border: none;
+            padding: 16px 50px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* === TELA 2: LOGIN === */
+        .login-screen {
+            padding: 40px 30px;
+            justify-content: center;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #888;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .btn-purple {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .btn-purple:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-white {
+            width: 100%;
+            background: #f5f5f5;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            padding: 16px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .btn-white:hover {
+            background: #e8e8e8;
+        }
+
+        .btn-google {
+            width: 100%;
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-google:hover {
+            background: #3367d6;
+        }
+
+        /* === TELA 3: HOME === */
+        .home-screen {
+            background: #f8f9fa;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar h1 {
+            font-size: 20px;
+        }
+
+        .top-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-icons i {
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4757;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        .home-content {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .welcome-text {
+            margin-bottom: 20px;
+        }
+
+        .welcome-text h2 {
+            color: #333;
+            font-size: 22px;
+        }
+
+        .welcome-text p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .home-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .home-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .home-card i {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .home-card h3 {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .card-ideias { color: #f39c12; }
+        .card-desafios { color: #e74c3c; }
+        .card-agenda { color: #3498db; }
+        .card-midia { color: #9b59b6; }
+        .card-maker { color: #1abc9c; }
+        .card-ods { color: #2ecc71; }
+        .card-ranking { color: #f1c40f; }
+        .card-ia { color: #e67e22; }
+
+        /* === TELA 4: BANCO DE IDEIAS === */
+        .screen-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .screen-header i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .screen-header h2 {
+            font-size: 20px;
+        }
+
+        .search-bar {
+            padding: 15px 20px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-bar input:focus {
+            border-color: #667eea;
+        }
+
+        .content-area {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .idea-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .idea-card h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .idea-card h3 i {
+            color: #2ecc71;
+        }
+
+        .ods-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .ods-tag {
+            background: #e8f5e9;
+            color: #2ecc71;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .idea-section {
+            margin-bottom: 10px;
+        }
+
+        .idea-section label {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .idea-section p {
+            color: #555;
+            font-size: 14px;
+            margin-top: 3px;
+        }
+
+        .idea-actions {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .idea-actions button {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .idea-actions button:hover {
+            color: #667eea;
+        }
+
+        .idea-actions button.liked {
+            color: #e74c3c;
+        }
+
+        /* === TELA 5: DESAFIOS === */
+        .challenge-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .challenge-card:hover {
+            transform: translateX(5px);
+        }
+
+        .challenge-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .challenge-info h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .challenge-info p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .btn-participar {
+            margin-left: auto;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* === TELA 6: ODS === */
+        .ods-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .ods-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .ods-item:hover {
+            transform: scale(1.05);
+        }
+
+        .ods-item span {
+            position: absolute;
+            bottom: 5px;
+            font-size: 9px;
+            text-align: center;
+            padding: 0 5px;
+            line-height: 1.2;
+        }
+
+        .ods-detail {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .ods-detail.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* === TELA 7: MÍDIA JOVEM === */
+        .media-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .media-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .media-tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 15px;
+        }
+
+        .media-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .media-item:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-publish {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+        }
+
+        .btn-publish:hover {
+            transform: scale(1.1);
+        }
+
+        /* === TELA 8: ESPAÇO MAKER === */
+        .maker-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .maker-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .maker-info h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .maker-info p {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .status-available {
+            color: #2ecc71;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-busy {
+            color: #e74c3c;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .btn-reserve {
+            margin-left: auto;
+            background: #1abc9c;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* === TELA 9: EQUIPES === */
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .team-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+        }
+
+        .team-info h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .team-stats {
+            display: flex;
+            gap: 15px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .team-stats i {
+            color: #f1c40f;
+        }
+
+        .team-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .team-actions button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-view {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-invite {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* === TELA 10: RANKING === */
+        .ranking-item {
+            background: white;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .rank-position {
+            font-size: 28px;
+            font-weight: 800;
+            width: 40px;
+            text-align: center;
+        }
+
+        .rank-1 { color: #f1c40f; }
+        .rank-2 { color: #bdc3c7; }
+        .rank-3 { color: #cd7f32; }
+
+        .rank-info h3 {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .rank-info p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .rank-points {
+            margin-left: auto;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* === TELA 11: IA MENTORA === */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f8f9fa;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.bot {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .chat-input-area {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .quick-questions {
+            padding: 10px 20px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .quick-questions button {
+            white-space: nowrap;
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-questions button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* === TELA 12: FEIRA DE PROJETOS === */
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .project-image {
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 50px;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-content h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .project-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .project-stat i {
+            color: #667eea;
+        }
+
+        /* === BOTTOM NAV === */
+        .bottom-nav {
+            display: none;
+            background: white;
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .bottom-nav.active {
+            display: flex;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            color: #888;
+            transition: all 0.3s;
+        }
+
+        .nav-item.active {
+            color: #667eea;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .nav-item span {
+            font-size: 10px;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- === TELA 1: SPLASH SCREEN === -->
+        <div class="screen splash-screen active" id="screen-splash">
+            <div class="splash-logo">💡</div>
+            <h1 class="splash-title">HUB TEENS EM AÇÃO</h1>
+            <p class="splash-subtitle">"Ideias que transformam, jovens que fazem acontecer."</p>
+            <button class="btn-primary" onclick="navigateTo('login')">
+                <i class="fas fa-arrow-right"></i> Entrar
+            </button>
+        </div>
+
+        <!-- === TELA 2: LOGIN === -->
+        <div class="screen login-screen" id="screen-login">
+            <div class="login-header">
+                <h2>Bem-vindo(a)!</h2>
+                <p>Faça login para continuar</p>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="E-mail">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Senha">
+            </div>
+            <button class="btn-purple" onclick="navigateTo('home')">
+                <i class="fas fa-sign-in-alt"></i> Entrar
+            </button>
+            <button class="btn-white" onclick="showToast('Criar conta em breve!')">
+                <i class="fas fa-user-plus"></i> Criar Conta
+            </button>
+            <button class="btn-google" onclick="showToast('Login com Google em breve!')">
+                <i class="fab fa-google"></i> Entrar com Google
+            </button>
+        </div>
+
+        <!-- === TELA 3: HOME === -->
+        <div class="screen home-screen" id="screen-home">
+            <div class="top-bar">
+                <h1><i class="fas fa-lightbulb"></i> Hub Teens</h1>
+                <div class="top-icons">
+                    <i class="fas fa-user-circle" onclick="showToast('Perfil')"></i>
+                    <i class="fas fa-bell" onclick="showToast('Notificações')">
+                        <span class="badge">3</span>
+                    </i>
+                    <i class="fas fa-trophy" onclick="showToast('Pontos: 1.250')">
+                        <span class="badge">1.2k</span>
+                    </i>
+                </div>
+            </div>
+            <div class="home-content">
+                <div class="welcome-text">
+                    <h2>Olá, Jovem! 👋</h2>
+                    <p>Pronto para transformar ideias em ação?</p>
+                </div>
+                <div class="cards-grid">
+                    <div class="home-card" onclick="navigateTo('ideias')">
+                        <i class="fas fa-lightbulb card-ideias"></i>
+                        <h3>Banco de Ideias</h3>
+                    </div>
+                    <div class="home-card" onclick="navigateTo('desafios')">
+                        <i class="fas fa-bullseye card-desafios"></i>
+                        <h3>Desafios</h3>
+                    </div>
+                    <div class="home-card" onclick="showToast('Agenda em breve!')">
+                        <i class="fas fa-calendar-alt card-agenda"></i>
+                        <h3>Agenda</h3>
+                    </div>
+                    <div class="home-card" onclick="navigateTo('midia')">
+                        <i class="fas fa-microphone card-midia"></i>
+                        <h3>Mídia Jovem</h3>
+                    </div>
+                    <div class="home-card" onclick="navigateTo('maker')">
+                        <i class="fas fa-cogs card-maker"></i>
+                        <h3>Espaço Maker</h3>
+                    </div>
+                    <div class="home-card" onclick="navigateTo('ods')">
+                        <i class="fas fa-globe-americas card-ods"></i>
+                        <h3>ODS</h3>
+                    </div>
+                    <div class="home-card" onclick="navigateTo('ranking')">
+                        <i class="fas fa-medal card-ranking"></i>
+                        <h3>Ranking</h3>
+                    </div>
+                    <div class="home-card" onclick="navigateTo('ia')">
+                        <i class="fas fa-robot card-ia"></i>
+                        <h3>IA Mentora</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === TELA 4: BANCO DE IDEIAS === -->
+        <div class="screen" id="screen-ideias">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-lightbulb"></i> Banco de Ideias</h2>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="🔍 Digite sua ideia...">
+            </div>
+            <div class="content-area">
+                <div class="idea-card">
+                    <h3><i class="fas fa-seedling"></i> Horta Inteligente</h3>
+                    <div class="ods-tags">
+                        <span class="ods-tag">ODS 2</span>
+                        <span class="ods-tag">ODS 12</span>
+                    </div>
+                    <div class="idea-section">
+                        <label>Problema</label>
+                        <p>Desperdício de água na irrigação de hortas escolares.</p>
+                    </div>
+                    <div class="idea-section">
+                        <label>Solução</label>
+                        <p>Sistema automatizado de irrigação com sensores de umidade do solo.</p>
+                    </div>
+                    <div class="idea-actions">
+                        <button onclick="toggleLike(this)"><i class="fas fa-heart"></i> 42</button>
+                        <button onclick="showToast('Comentários em breve!')"><i class="fas fa-comment"></i> 8</button>
+                        <button onclick="showToast('Você entrou no projeto!')"><i class="fas fa-plus-circle"></i> Participar</button>
+                    </div>
+                </div>
+                <div class="idea-card">
+                    <h3><i class="fas fa-recycle"></i> Eco Escola</h3>
+                    <div class="ods-tags">
+                        <span class="ods-tag">ODS 12</span>
+                        <span class="ods-tag">ODS 13</span>
+                    </div>
+                    <div class="idea-section">
+                        <label>Problema</label>
+                        <p>Alto volume de resíduos descartáveis na escola.</p>
+                    </div>
+                    <div class="idea-section">
+                        <label>Solução</label>
+                        <p>Programa de coleta seletiva com gamificação e recompensas.</p>
+                    </div>
+                    <div class="idea-actions">
+                        <button onclick="toggleLike(this)"><i class="fas fa-heart"></i> 35</button>
+                        <button onclick="showToast('Comentários em breve!')"><i class="fas fa-comment"></i> 12</button>
+                        <button onclick="showToast('Você entrou no projeto!')"><i class="fas fa-plus-circle"></i> Participar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === TELA 5: DESAFIOS === -->
+        <div class="screen" id="screen-desafios">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-bullseye"></i> Desafios</h2>
+            </div>
+            <div class="content-area">
+                <h3 style="margin-bottom: 15px; color: #333;">Desafios Ativos</h3>
+                <div class="challenge-card">
+                    <div class="challenge-icon" style="background: #e8f5e9;">♻️</div>
+                    <div class="challenge-info">
+                        <h3>Escola sem Lixo</h3>
+                        <p>Reduza o lixo da sua escola em 50%</p>
+                    </div>
+                    <button class="btn-participar" onclick="showToast('Você entrou no desafio!')">Participar</button>
+                </div>
+                <div class="challenge-card">
+                    <div class="challenge-icon" style="background: #fff3e0;">📚</div>
+                    <div class="challenge-info">
+                        <h3>Leitura para Todos</h3>
+                        <p>Leia e compartilhe 5 livros este mês</p>
+                    </div>
+                    <button class="btn-participar" onclick="showToast('Você entrou no desafio!')">Participar</button>
+                </div>
+                <div class="challenge-card">
+                    <div class="challenge-icon" style="background: #e3f2fd;">💧</div>
+                    <div class="challenge-info">
+                        <h3>Economia de Água</h3>
+                        <p>Economize 20% de água na escola</p>
+                    </div>
+                    <button class="btn-participar" onclick="showToast('Você entrou no desafio!')">Participar</button>
+                </div>
+                <div class="challenge-card">
+                    <div class="challenge-icon" style="background: #e8f5e9;">🌳</div>
+                    <div class="challenge-info">
+                        <h3>Mais Árvores na Escola</h3>
+                        <p>Plante 10 mudas no pátio escolar</p>
+                    </div>
+                    <button class="btn-participar" onclick="showToast('Você entrou no desafio!')">Participar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- === TELA 6: ODS === -->
+        <div class="screen" id="screen-ods">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-globe-americas"></i> ODS</h2>
+            </div>
+            <div class="content-area">
+                <div class="ods-grid">
+                    <div class="ods-item" style="background: #e5243b;" onclick="showODS(1)">1<span>Erradicação da Pobreza</span></div>
+                    <div class="ods-item" style="background: #dda63a;" onclick="showODS(2)">2<span>Fome Zero</span></div>
+                    <div class="ods-item" style="background: #4c9f38;" onclick="showODS(3)">3<span>Saúde e Bem-Estar</span></div>
+                    <div class="ods-item" style="background: #c5192d;" onclick="showODS(4)">4<span>Educação de Qualidade</span></div>
+                    <div class="ods-item" style="background: #ff3a21;" onclick="showODS(5)">5<span>Igualdade de Gênero</span></div>
+                    <div class="ods-item" style="background: #26bde2;" onclick="showODS(6)">6<span>Água Potável</span></div>
+                    <div class="ods-item" style="background: #fcc30b;" onclick="showODS(7)">7<span>Energia Limpa</span></div>
+                    <div class="ods-item" style="background: #a21942;" onclick="showODS(8)">8<span>Trabalho Decente</span></div>
+                    <div class="ods-item" style="background: #fd6925;" onclick="showODS(9)">9<span>Indústria e Inovação</span></div>
+                    <div class="ods-item" style="background: #dd1367;" onclick="showODS(10)">10<span>Redução das Desigualdades</span></div>
+                    <div class="ods-item" style="background: #fd9d24;" onclick="showODS(11)">11<span>Cidades Sustentáveis</span></div>
+                    <div class="ods-item" style="background: #bf8b2e;" onclick="showODS(12)">12<span>Consumo Responsável</span></div>
+                    <div class="ods-item" style="background: #3f7e44;" onclick="showODS(13)">13<span>Ação Climática</span></div>
+                    <div class="ods-item" style="background: #0a97d9;" onclick="showODS(14)">14<span>Vida na Água</span></div>
+                    <div class="ods-item" style="background: #56c02b;" onclick="showODS(15)">15<span>Vida Terrestre</span></div>
+                    <div class="ods-item" style="background: #00689d;" onclick="showODS(16)">16<span>Paz e Justiça</span></div>
+                    <div class="ods-item" style="background: #19486a;" onclick="showODS(17)">17<span>Parcerias</span></div>
+                </div>
+                <div class="ods-detail" id="ods-detail">
+                    <h3 id="ods-title">ODS</h3>
+                    <p id="ods-desc">Descrição do ODS selecionado.</p>
+                    <div style="margin-top: 15px;">
+                        <label style="color: #667eea; font-weight: 700; font-size: 12px;">PROBLEMAS LOCAIS</label>
+                        <p style="margin-top: 5px; color: #555; font-size: 14px;">Identifique problemas na sua comunidade relacionados a este ODS.</p>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <label style="color: #667eea; font-weight: 700; font-size: 12px;">PROJETOS RELACIONADOS</label>
+                        <p style="margin-top: 5px; color: #555; font-size: 14px;">Veja projetos que já estão trabalhando nesta área.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === TELA 7: MÍDIA JOVEM === -->
+        <div class="screen" id="screen-midia">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-microphone"></i> Mídia Jovem</h2>
+            </div>
+            <div class="media-tabs">
+                <div class="media-tab active" onclick="switchTab(this, 'fotos')">📸 Fotos</div>
+                <div class="media-tab" onclick="switchTab(this, 'videos')">🎥 Vídeos</div>
+                <div class="media-tab" onclick="switchTab(this, 'podcasts')">🎙️ Podcasts</div>
+                <div class="media-tab" onclick="switchTab(this, 'jornal')">📰 Jornal</div>
+            </div>
+            <div class="content-area">
+                <div class="media-grid" id="media-fotos">
+                    <div class="media-item"><i class="fas fa-image"></i></div>
+                    <div class="media-item"><i class="fas fa-image"></i></div>
+                    <div class="media-item"><i class="fas fa-image"></i></div>
+                    <div class="media-item"><i class="fas fa-image"></i></div>
+                    <div class="media-item"><i class="fas fa-image"></i></div>
+                    <div class="media-item"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+            <button class="btn-publish" onclick="showToast('Publicar conteúdo em breve!')">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <!-- === TELA 8: ESPAÇO MAKER === -->
+        <div class="screen" id="screen-maker">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-cogs"></i> Espaço Maker</h2>
+            </div>
+            <div class="content-area">
+                <div class="maker-card">
+                    <div class="maker-icon">🖨️</div>
+                    <div class="maker-info">
+                        <h3>Impressora 3D</h3>
+                        <p>Impressão de protótipos e peças</p>
+                        <span class="status-available">● Disponível</span>
+                    </div>
+                    <button class="btn-reserve" onclick="showToast('Reserva solicitada!')">Reservar</button>
+                </div>
+                <div class="maker-card">
+                    <div class="maker-icon">🤖</div>
+                    <div class="maker-info">
+                        <h3>Robótica</h3>
+                        <p>Kits Arduino e LEGO Mindstorms</p>
+                        <span class="status-busy">● Em uso</span>
+                    </div>
+                    <button class="btn-reserve" onclick="showToast('Reserva solicitada!')">Reservar</button>
+                </div>
+                <div class="maker-card">
+                    <div class="maker-icon">💻</div>
+                    <div class="maker-info">
+                        <h3>Programação</h3>
+                        <p>Estações de desenvolvimento</p>
+                        <span class="status-available">● Disponível</span>
+                    </div>
+                    <button class="btn-reserve" onclick="showToast('Reserva solicitada!')">Reservar</button>
+                </div>
+                <div class="maker-card">
+                    <div class="maker-icon">🔧</div>
+                    <div class="maker-info">
+                        <h3>Ferramentas Maker</h3>
+                        <p>Solda, serra, furadeira e mais</p>
+                        <span class="status-available">● Disponível</span>
+                    </div>
+                    <button class="btn-reserve" onclick="showToast('Reserva solicitada!')">Reservar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- === TELA 9: EQUIPES === -->
+        <div class="screen" id="screen-equipes">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-users"></i> Equipes</h2>
+            </div>
+            <div class="content-area">
+                <div class="team-card">
+                    <div class="team-header">
+                        <div class="team-avatar">🌱</div>
+                        <div class="team-info">
+                            <h3>Inovação Verde</h3>
+                            <div class="team-stats">
+                                <span><i class="fas fa-users"></i> 6 Integrantes</span>
+                                <span><i class="fas fa-star"></i> 1.250 pts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-actions">
+                        <button class="btn-view" onclick="showToast('Ver projeto em breve!')">📋 Ver Projeto</button>
+                        <button class="btn-invite" onclick="showToast('Convite enviado!')">➕ Convidar</button>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-header">
+                        <div class="team-avatar">♻️</div>
+                        <div class="team-info">
+                            <h3>EcoFuture</h3>
+                            <div class="team-stats">
+                                <span><i class="fas fa-users"></i> 8 Integrantes</span>
+                                <span><i class="fas fa-star"></i> 2.100 pts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-actions">
+                        <button class="btn-view" onclick="showToast('Ver projeto em breve!')">📋 Ver Projeto</button>
+                        <button class="btn-invite" onclick="showToast('Convite enviado!')">➕ Convidar</button>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-header">
+                        <div class="team-avatar">🚀</div>
+                        <div class="team-info">
+                            <h3>Jovens Criadores</h3>
+                            <div class="team-stats">
+                                <span><i class="fas fa-users"></i> 5 Integrantes</span>
+                                <span><i class="fas fa-star"></i> 1.800 pts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-actions">
+                        <button class="btn-view" onclick="showToast('Ver projeto em breve!')">📋 Ver Projeto</button>
+                        <button class="btn-invite" onclick="showToast('Convite enviado!')">➕ Convidar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === TELA 10: RANKING === -->
+        <div class="screen" id="screen-ranking">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-medal"></i> Ranking</h2>
+            </div>
+            <div class="content-area">
+                <div class="ranking-item">
+                    <div class="rank-position rank-1">🥇</div>
+                    <div class="rank-info">
+                        <h3>EcoFuture</h3>
+                        <p>8 integrantes • 15 projetos</p>
+                    </div>
+                    <div class="rank-points">2.100 pts</div>
+                </div>
+                <div class="ranking-item">
+                    <div class="rank-position rank-2">🥈</div>
+                    <div class="rank-info">
+                        <h3>Jovens Criadores</h3>
+                        <p>5 integrantes • 12 projetos</p>
+                    </div>
+                    <div class="rank-points">1.800 pts</div>
+                </div>
+                <div class="ranking-item">
+                    <div class="rank-position rank-3">🥉</div>
+                    <div class="rank-info">
+                        <h3>Inovação Verde</h3>
+                        <p>6 integrantes • 10 projetos</p>
+                    </div>
+                    <div class="rank-points">1.250 pts</div>
+                </div>
+                <div class="ranking-item">
+                    <div class="rank-position">4</div>
+                    <div class="rank-info">
+                        <h3>Tech Teens</h3>
+                        <p>4 integrantes • 8 projetos</p>
+                    </div>
+                    <div class="rank-points">980 pts</div>
+                </div>
+                <div class="ranking-item">
+                    <div class="rank-position">5</div>
+                    <div class="rank-info">
+                        <h3>Água Viva</h3>
+                        <p>7 integrantes • 6 projetos</p>
+                    </div>
+                    <div class="rank-points">750 pts</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === TELA 11: IA MENTORA === -->
+        <div class="screen" id="screen-ia">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-robot"></i> IA Mentora</h2>
+            </div>
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message bot">
+                        👋 Olá! Sou sua IA Mentora. Como posso ajudar você hoje?
+                    </div>
+                </div>
+                <div class="quick-questions">
+                    <button onclick="sendQuickQuestion('Como melhorar meu projeto?')">💬 Como melhorar meu projeto?</button>
+                    <button onclick="sendQuickQuestion('Qual ODS combina com minha ideia?')">💬 Qual ODS combina com minha ideia?</button>
+                    <button onclick="sendQuickQuestion('Como criar um plano financeiro?')">💬 Como criar um plano financeiro?</button>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Digite sua pergunta...">
+                    <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- === TELA 12: FEIRA DE PROJETOS === -->
+        <div class="screen" id="screen-feira">
+            <div class="screen-header">
+                <i class="fas fa-arrow-left" onclick="navigateTo('home')"></i>
+                <h2><i class="fas fa-trophy"></i> Feira de Projetos</h2>
+            </div>
+            <div class="content-area">
+                <h3 style="margin-bottom: 15px; color: #333;">Projetos em Destaque</h3>
+                <div class="project-card">
+                    <div class="project-image">🌱</div>
+                    <div class="project-content">
+                        <h3>Horta Inteligente</h3>
+                        <p>Sistema de irrigação automatizado para hortas escolares, reduzindo o desperdício de água em 60%.</p>
+                        <div class="project-stats">
+                            <span class="project-stat"><i class="fas fa-image"></i> 12 fotos</span>
+                            <span class="project-stat"><i class="fas fa-video"></i> 3 vídeos</span>
+                            <span class="project-stat"><i class="fas fa-chart-line"></i> Alto impacto</span>
+                            <span class="project-stat"><i class="fas fa-users"></i> 6 membros</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">♻️</div>
+                    <div class="project-content">
+                        <h3>Eco Escola</h3>
+                        <p>Programa de coleta seletiva com gamificação que envolve toda a comunidade escolar.</p>
+                        <div class="project-stats">
+                            <span class="project-stat"><i class="fas fa-image"></i> 8 fotos</span>
+                            <span class="project-stat"><i class="fas fa-video"></i> 2 vídeos</span>
+                            <span class="project-stat"><i class="fas fa-chart-line"></i> Médio impacto</span>
+                            <span class="project-stat"><i class="fas fa-users"></i> 8 membros</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">📚</div>
+                    <div class="project-content">
+                        <h3>Leitura Conectada</h3>
+                        <p>Plataforma digital de compartilhamento de livros entre estudantes da rede pública.</p>
+                        <div class="project-stats">
+                            <span class="project-stat"><i class="fas fa-image"></i> 5 fotos</span>
+                            <span class="project-stat"><i class="fas fa-video"></i> 1 vídeo</span>
+                            <span class="project-stat"><i class="fas fa-chart-line"></i> Alto impacto</span>
+                            <span class="project-stat"><i class="fas fa-users"></i> 5 membros</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === BOTTOM NAV === -->
+        <div class="bottom-nav" id="bottom-nav">
+            <div class="nav-item active" onclick="navigateTo('home')">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('ideias')">
+                <i class="fas fa-lightbulb"></i>
+                <span>Ideias</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('desafios')">
+                <i class="fas fa-bullseye"></i>
+                <span>Desafios</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('equipes')">
+                <i class="fas fa-users"></i>
+                <span>Equipes</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('feira')">
+                <i class="fas fa-trophy"></i>
+                <span>Feira</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="display:none; position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background:#333; color:white; padding:12px 24px; border-radius:25px; font-size:14px; z-index:1000; animation:fadeIn 0.3s;"></div>
+
+    <script>
+        function navigateTo(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen-' + screenId).classList.add('active');
+
+            // Mostrar/esconder bottom nav
+            const bottomNav = document.getElementById('bottom-nav');
+            if (screenId === 'home' || screenId === 'ideias' || screenId === 'desafios' || screenId === 'equipes' || screenId === 'feira') {
+                bottomNav.classList.add('active');
+            } else {
+                bottomNav.classList.remove('active');
+            }
+
+            // Atualizar nav ativo
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            const navMap = {'home': 0, 'ideias': 1, 'desafios': 2, 'equipes': 3, 'feira': 4};
+            if (navMap[screenId] !== undefined) {
+                document.querySelectorAll('.nav-item')[navMap[screenId]].classList.add('active');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2500);
+        }
+
+        function toggleLike(btn) {
+            btn.classList.toggle('liked');
+            const icon = btn.querySelector('i');
+            if (btn.classList.contains('liked')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+            }
+            showToast('Curtido! ❤️');
+        }
+
+        function showODS(number) {
+            const detail = document.getElementById('ods-detail');
+            const title = document.getElementById('ods-title');
+            const desc = document.getElementById('ods-desc');
+
+            const odsData = {
+                1: {title: 'ODS 1: Erradicação da Pobreza', desc: 'Acabar com a pobreza em todas as suas formas, em todos os lugares.'},
+                2: {title: 'ODS 2: Fome Zero', desc: 'Acabar com a fome, alcançar a segurança alimentar e melhoria da nutrição.'},
+                3: {title: 'ODS 3: Saúde e Bem-Estar', desc: 'Assegurar uma vida saudável e promover o bem-estar para todos.'},
+                4: {title: 'ODS 4: Educação de Qualidade', desc: 'Assegurar a educação inclusiva e equitativa e de qualidade.'},
+                5: {title: 'ODS 5: Igualdade de Gênero', desc: 'Alcançar a igualdade de gênero e empoderar todas as mulheres e meninas.'},
+                6: {title: 'ODS 6: Água Potável', desc: 'Assegurar a disponibilidade e gestão sustentável da água.'},
+                7: {title: 'ODS 7: Energia Limpa', desc: 'Assegurar o acesso confiável, sustentável e moderno à energia.'},
+                8: {title: 'ODS 8: Trabalho Decente', desc: 'Promover o crescimento econômico sustentado e inclusivo.'},
+                9: {title: 'ODS 9: Indústria e Inovação', desc: 'Construir infraestruturas resilientes e promover a inovação.'},
+                10: {title: 'ODS 10: Redução das Desigualdades', desc: 'Reduzir a desigualdade dentro dos países e entre eles.'},
+                11: {title: 'ODS 11: Cidades Sustentáveis', desc: 'Tornar as cidades e assentamentos humanos inclusivos e sustentáveis.'},
+                12: {title: 'ODS 12: Consumo Responsável', desc: 'Assegurar padrões de produção e de consumo sustentáveis.'},
+                13: {title: 'ODS 13: Ação Climática', desc: 'Tomar medidas urgentes para combater a mudança climática.'},
+                14: {title: 'ODS 14: Vida na Água', desc: 'Conservar e usar de forma sustentável os oceanos e recursos marinhos.'},
+                15: {title: 'ODS 15: Vida Terrestre', desc: 'Proteger, recuperar e promover o uso sustentável dos ecossistemas.'},
+                16: {title: 'ODS 16: Paz e Justiça', desc: 'Promover sociedades pacíficas e inclusivas para o desenvolvimento sustentável.'},
+                17: {title: 'ODS 17: Parcerias', desc: 'Fortalecer os meios de implementação e revitalizar a parceria global.'}
+            };
+
+            title.textContent = odsData[number].title;
+            desc.textContent = odsData[number].desc;
+            detail.classList.add('active');
+        }
+
+        function switchTab(tab, type) {
+            document.querySelectorAll('.media-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            showToast('Aba ' + type + ' selecionada!');
+        }
+
+        function sendQuickQuestion(question) {
+            addMessage(question, 'user');
+            setTimeout(() => {
+                const responses = {
+                    'Como melhorar meu projeto?': '💡 Para melhorar seu projeto, sugiro: 1) Faça pesquisa de campo com sua comunidade, 2) Busque feedback de mentores, 3) Protótipo rápido para testar ideias, 4) Documente todo o processo!',
+                    'Qual ODS combina com minha ideia?': '🌍 Me conte mais sobre sua ideia! Geralmente projetos de tecnologia social combinam com ODS 4 (Educação), ODS 9 (Inovação) ou ODS 11 (Cidades Sustentáveis).',
+                    'Como criar um plano financeiro?': '💰 Um bom plano financeiro inclui: 1) Estimativa de custos, 2) Fontes de financiamento, 3) Cronograma de gastos, 4) Indicadores de retorno. Quer que eu detalhe algum desses pontos?'
+                };
+                addMessage(responses[question] || 'Interessante! Me conte mais detalhes para eu poder ajudar melhor. 🤖', 'bot');
+            }, 1000);
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            input.value = '';
+
+            setTimeout(() => {
+                const botResponses = [
+                    'Ótima pergunta! Vou pesquisar isso para você. 📚',
+                    'Interessante! Você já considerou envolver mais pessoas no projeto? 👥',
+                    'Que ideia incrível! Sugiro começar com um protótipo simples. 🚀',
+                    'Você pode encontrar recursos sobre isso na nossa biblioteca de projetos! 📖',
+                    'Isso se alinha perfeitamente com os ODS! Qual especificamente? 🌍'
+                ];
+                addMessage(botResponses[Math.floor(Math.random() * botResponses.length)], 'bot');
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const container = document.getElementById('chat-messages');
+            const msg = document.createElement('div');
+            msg.className = 'message ' + sender;
+            msg.textContent = text;
+            container.appendChild(msg);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Enter key no chat
+        document.getElementById('chat-input')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
